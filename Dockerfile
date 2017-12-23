@@ -12,5 +12,6 @@ RUN dotnet publish -c Release -o out
 # build runtime image
 FROM microsoft/aspnetcore:2.0.4
 WORKDIR /app
+ENV ASPNETCORE_URLS http://+:5000
 COPY --from=build-env /app/out ./
 ENTRYPOINT ["dotnet", "api.dll"]
