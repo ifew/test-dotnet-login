@@ -27,6 +27,7 @@ environment:
 on_success:
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):github.com/ifew/test-dotnet-login.git`n"
+  - git remote set-url origin git@github.com:ifew/test-dotnet-login.git
   #- git remote add origin https://$($env:access_token):github.com/ifew/test-dotnet-login.git
   - git config --global user.email "chitpong@gmail.com"
   - git config --global user.name "iFew"
