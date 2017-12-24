@@ -24,21 +24,17 @@ build_script:
 environment:
   access_token:
     secure: ypgB8jL0NfIyMjzZ3nGFoZegJ7Omwg8rWT9HGoo38abzTnV/RBDuH6ZpOWFmG4Ei
-on_success:
+clone_depth: 0
+test_script:
+  - cmd: OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test --configuration Release --framework netcoreapp2.0" -filter:"+[*]*" -output:".\unit-results.xml" -oldstyle 
+on_finish :
   - git config --global credential.helper store
-  #- ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):github.com/ifew/test-dotnet-login.git`n"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  #- git remote set-url origin git@github.com:ifew/test-dotnet-login.git
-  #- git remote add origin https://$($env:access_token):github.com/ifew/test-dotnet-login.git
   - git config --global user.email "chitpong@gmail.com"
   - git config --global user.name "iFew"
   - git add unit-results.xml
   - git commit -m "Added Unit Test Report XML File"
   - git push origin master
-clone_depth: 0
-test_script:
-  - cmd: OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test --configuration Release --framework netcoreapp2.0" -filter:"+[*]*" -output:".\unit-results.xml" -oldstyle 
-on_finish :
   #- ps: Push-AppveyorArtifact ".\unit-results.xml"
   #- MSBuild.SonarQube.Runner.exe begin /k:"test-dotnet-login" /d:"sonar.host.url=http://localhost" /n:"test-dotnet-login" /v:"1.0.0" /d:sonar.cs.opencover.reportsPaths="unit-results.xml"
   #- msbuild /t:rebuild
