@@ -26,8 +26,9 @@ environment:
     secure: ypgB8jL0NfIyMjzZ3nGFoZegJ7Omwg8rWT9HGoo38abzTnV/RBDuH6ZpOWFmG4Ei
 on_success:
   - git config --global credential.helper store
-  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):github.com/ifew/test-dotnet-login.git`n"
-  - git remote set-url origin git@github.com:ifew/test-dotnet-login.git
+  #- ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):github.com/ifew/test-dotnet-login.git`n"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  #- git remote set-url origin git@github.com:ifew/test-dotnet-login.git
   #- git remote add origin https://$($env:access_token):github.com/ifew/test-dotnet-login.git
   - git config --global user.email "chitpong@gmail.com"
   - git config --global user.name "iFew"
