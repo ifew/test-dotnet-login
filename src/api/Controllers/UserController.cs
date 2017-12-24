@@ -30,6 +30,27 @@ namespace api.Controllers
 
             return CreatedAtRoute("GetUser", new { id = item.Id }, item);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(long id, [FromBody] User item)
+        {
+            if (item == null || item.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var user = _context.Users.FirstOrDefault(t => t.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Displayname = item.Displayname;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return new NoContentResult();
+        }
     }
     
 }
