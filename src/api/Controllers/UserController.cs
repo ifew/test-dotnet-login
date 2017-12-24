@@ -10,6 +10,19 @@ namespace api.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
+        [HttpPost]
+        public IActionResult Create([FromBody] User item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            _context.Users.Add(item);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetUser", new { id = item.Id }, item);
+        }
     }
     
 }

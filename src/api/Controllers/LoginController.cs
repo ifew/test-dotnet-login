@@ -29,7 +29,7 @@ namespace api.Controllers
             return _context.Users.ToList();
         }
 
-        [HttpGet("{id}", Name = "GetTodo")]
+        [HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetById(long id)
         {
             var item = _context.Users.FirstOrDefault(t => t.Id == id);
