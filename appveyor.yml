@@ -35,7 +35,6 @@ on_finish :
   - git add unit-results.xml
   - git commit -m "Added Unit Test Report XML File"
   - git push origin master 
-on_finish :
   #- ps: Push-AppveyorArtifact ".\unit-results.xml"
   #- MSBuild.SonarQube.Runner.exe begin /k:"test-dotnet-login" /d:"sonar.host.url=http://localhost" /n:"test-dotnet-login" /v:"1.0.0" /d:sonar.cs.opencover.reportsPaths="unit-results.xml"
   #- msbuild /t:rebuild
