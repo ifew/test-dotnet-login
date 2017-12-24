@@ -10,6 +10,8 @@ namespace api.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
+        private readonly UserContext _context;
+        
         [HttpPost]
         public IActionResult Create([FromBody] User item)
         {
