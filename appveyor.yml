@@ -25,7 +25,8 @@ environment:
   access_token:
     secure: ypgB8jL0NfIyMjzZ3nGFoZegJ7Omwg8rWT9HGoo38abzTnV/RBDuH6ZpOWFmG4Ei
 clone_depth: 0
-test_script:
+#test_script: 
+on_finish :
   - cmd: OpenCover.Console.exe -register:user -target:"dotnet.exe" -targetargs:"test --configuration Release --framework netcoreapp2.0" -filter:"+[*]*" -output:".\unit-results.xml" -oldstyle
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
