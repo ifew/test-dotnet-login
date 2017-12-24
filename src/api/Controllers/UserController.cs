@@ -11,7 +11,12 @@ namespace api.Controllers
     public class UserController : Controller
     {
         private readonly UserContext _context;
-        
+
+        public UserController(UserContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] User item)
         {
